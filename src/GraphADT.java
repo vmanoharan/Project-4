@@ -6,7 +6,7 @@
  * 
  * @author sapan (sapan@cs.wisc.edu)
  */
-public interface AA<E> {
+public interface GraphADT<E> {
 
 	/**
 	 * Add new vertex to the graph
