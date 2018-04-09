@@ -13,6 +13,7 @@ import java.util.Set;
 public class Graph<E> implements GraphADT<E> {
 	private int[][] edges;
 	private E[] dictionary;
+	private int items = 0;
     /**
      * Instance variables and constructors
      */
@@ -22,6 +23,20 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E addVertex(E vertex) {
+        if(vertex == null)
+      	{
+      		return null;
+      	}
+        for(int i=0; i<dictionary.length; i++)
+        {
+        	if(dictionary[i].toString().equals(vertex.toString()))
+        	{
+        		return null;
+        	}
+        }
+        dictionary[items] = vertex;
+        items++;
+        return vertex;
     }
 
     /**
