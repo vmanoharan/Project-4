@@ -11,7 +11,8 @@ import java.util.Set;
  * 
  */
 public class Graph<E> implements GraphADT<E> {
-    
+	private int[][] edges;
+	private E[] dictionary;
     /**
      * Instance variables and constructors
      */
@@ -21,7 +22,6 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E addVertex(E vertex) {
-        
     }
 
     /**
