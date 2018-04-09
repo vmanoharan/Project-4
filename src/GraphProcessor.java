@@ -106,7 +106,7 @@ public class GraphProcessor {
      *  shortest path between cat and wheat is the following list of words:
      *     [cat, hat, heat, wheat]
      *
-     * If word1 = word2, List will be empty. 
+     * If word1 = word2, List will be empty (0 items).
      * Both the arguments will always be present in the graph.
      * 
      * @param word1 first word
@@ -117,7 +117,6 @@ public class GraphProcessor {
         if(word1.equals(word2))
         {
         	List<String> a = new ArrayList<String>();
-        	a.add("");
         	return a;
         }
 		return null; // TO BE ADDED
@@ -145,7 +144,10 @@ public class GraphProcessor {
      * @return Integer distance
      */
     public Integer getShortestDistance(String word1, String word2) {
-        return null;
+        if (word1.equals(word2)) {
+            return -1;
+        }
+        return getShortestPath(word1, word2).size() - 1;
     }
     
     /**
