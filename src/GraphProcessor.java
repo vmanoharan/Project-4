@@ -45,8 +45,6 @@ public class GraphProcessor {
      * Graph which stores the dictionary words and their associated connections
      */
     private GraphADT<String> graph;
-    private String[] dictionary;
-    private int[][] relations;
 
     /**
      * Constructor for this class. Initializes instances variables to set the starting state of the object
@@ -72,6 +70,7 @@ public class GraphProcessor {
      */
 	@SuppressWarnings("static-access")
 	public Integer populateGraph(String filepath) throws IOException {
+		String[] dictionary;
     	WordProcessor wordProcessor = new WordProcessor();
 		Stream<String> inputData = wordProcessor.getWordStream(filepath);
     	dictionary = (String[]) inputData.toArray();

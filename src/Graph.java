@@ -32,15 +32,23 @@ public class Graph<E> implements GraphADT<E> {
         {
         	return null;
         }
-				if(items >= dictionary.length())
+				if(items >= dictionary.length
         {
-        	E[] temp = new E[dictionary.length*2];
+        	E[] temp = (E[]) new Object[dictionary.length*2];
         	for(int i=0; i<items; i++)
           {
           	temp[i] = dictionary[i];
           }
-          int[][] temp = new int[edges.length()][edges.length()]
-          for(int i=0; i<)
+          int[][] temp1 = new int[edges.length*2][edges.length*2];
+          for(int i=0; i<edges.length; i++)
+          {
+          	for(int j=0; j<edges.length; j++)
+            {
+            	temp1[i][j] = edges[i][j];
+            }
+          }
+          edges = temp1;
+          dictionary = temp;
         }
 				dictionary[items] = vertex;
         items++;
@@ -130,7 +138,8 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getNeighbors(E vertex) {
-        
+        int index = getIndex(vertex);
+        for(int i = 0)
         
     }
 
