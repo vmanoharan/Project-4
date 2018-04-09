@@ -1,4 +1,6 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,55 +24,68 @@ import org.junit.Test;
 //////////////////////////// 80 columns wide //////////////////////////////////
 
 /**
- * @author Yuming Ma and Yuxuan Liu
+ * Junit test class to test class @see GraphProcessor
  *
+ * @author Yuming Ma
  */
-public class TestSearchTree {
+public class GraphProcessorTest {
 
-    SearchTreeADT<String> tree = null;
-    String expected = null;
-    String actual = null;
+	private GraphADT<String> graph;
+	
+	private static List<String> vertices;
+	
+	private static int numOfVertices = 0;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		vertices = new ArrayList<>();
+		vertices.add("at");
+		vertices.add("it");
+		vertices.add("cat");
+		vertices.add("hat");
+		vertices.add("hot");
+		vertices.add("rat");
+		vertices.add("heat");
+		vertices.add("neat");
+		vertices.add("major");
+		vertices.add("wheat");
+		vertices.add("streak");	
+		vertices.add("husband");
+		for (String vertex : vertices)
+			numOfVertices++;
+	}
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {}
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		vertices = null;
+		numOfVertices = 0;
+	}
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {}
+	@Before
+	public void setUp() throws Exception {
+		this.graph = new Graph<>();
+	}
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        tree = new BalancedSearchTree<String>();
-    }
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-        // reset tree, actual, expected, and actual to null
-        tree = null;
-        actual = null;
-        expected = null;
-    }
-
+	@After
+	public void tearDown() throws Exception {
+		this.graph = null;
+	}
+    
     @Test
-    public void test01_isEmpty_on_empty_tree() {
-        expected = "true";
-        actual = "" + tree.isEmpty();
+    public void test01_isAdjacent_given_nonexistent_vertices() {
+        expected = "";
+        actual = "";
         if (!expected.equals(actual))
             fail("expected: " + expected + " actual: " + actual);
     }
-
-   
+    @Test
+    public void test02_insert_null() {
+        
+    }
+    @Test
+    public void test03_insert_invalid() {
+        
+    }
 
 }
 
