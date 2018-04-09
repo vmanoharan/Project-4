@@ -28,11 +28,11 @@ public class Graph<E> implements GraphADT<E> {
       		return null;
       	}
         int index = getIndex(vertex);
-        if(index < 0)
+        if(index > 0)
         {
         	return null;
         }
-				if(items >= dictionary.length
+				if(items >= dictionary.length)
         {
         	E[] temp = (E[]) new Object[dictionary.length*2];
         	for(int i=0; i<items; i++)
