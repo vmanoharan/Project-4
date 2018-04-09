@@ -73,21 +73,19 @@ public class GraphProcessor {
 	@SuppressWarnings("static-access")
 	public Integer populateGraph(String filepath) throws IOException {
     	WordProcessor wordProcessor = new WordProcessor();
-    	@SuppressWarnings("static-access")
 		Stream<String> inputData = wordProcessor.getWordStream(filepath);
     	dictionary = (String[]) inputData.toArray();
-    	relations = new int[dictionary.length][dictionary.length];
+    	for(int i=0; i<dictionary.length; i++)
+    	{
+    		graph.addVertex(dictionary[i]);
+    	}
     	for(int i=0; i<dictionary.length; i++)
     	{
     		for(int j=0; j<dictionary.length; j++)
     		{
     			if(wordProcessor.isAdjacent(dictionary[i], dictionary[j]))
     			{
-    				relations[i][j] = 1;
-    			}
-    			else
-    			{
-    				relations[i][j] = 0;
+    				graph.addEdge(dictionary[i], dictionary[j]);
     			}
     		}
     	}
