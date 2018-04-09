@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -41,6 +45,8 @@ public class GraphProcessor {
      * Graph which stores the dictionary words and their associated connections
      */
     private GraphADT<String> graph;
+    private String[] dictionary;
+    private int[][] relations;
 
     /**
      * Constructor for this class. Initializes instances variables to set the starting state of the object
@@ -62,10 +68,30 @@ public class GraphProcessor {
      * 
      * @param filepath file path to the dictionary
      * @return Integer the number of vertices (words) added
+     * @throws IOException 
      */
-    public Integer populateGraph(String filepath) {
-        return 0;
-    
+	@SuppressWarnings("static-access")
+	public Integer populateGraph(String filepath) throws IOException {
+    	WordProcessor wordProcessor = new WordProcessor();
+    	@SuppressWarnings("static-access")
+		Stream<String> inputData = wordProcessor.getWordStream(filepath);
+    	dictionary = (String[]) inputData.toArray();
+    	relations = new int[dictionary.length][dictionary.length];
+    	for(int i=0; i<dictionary.length; i++)
+    	{
+    		for(int j=0; j<dictionary.length; j++)
+    		{
+    			if(wordProcessor.isAdjacent(dictionary[i], dictionary[j]))
+    			{
+    				relations[i][j] = 1;
+    			}
+    			else
+    			{
+    				relations[i][j] = 0;
+    			}
+    		}
+    	}
+		return dictionary.length;
     }
 
     
@@ -90,7 +116,13 @@ public class GraphProcessor {
      * @return List<String> list of the words
      */
     public List<String> getShortestPath(String word1, String word2) {
-        return null;
+        if(word1.equals(word2))
+        {
+        	List<String> a = new ArrayList<String>();
+        	a.add("");
+        	return a;
+        }
+		return null; // TO BE ADDED
     
     }
     
