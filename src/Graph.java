@@ -11,13 +11,13 @@ import java.util.Set;
  * 
  */
 public class Graph<E> implements GraphADT<E> {
-	private int[][] edges;
-	private E[] dictionary;
-	private int items = 0;
+    private int[][] edges;
+		private E[] dictionary;
+    private int items = 0;
     /**
      * Instance variables and constructors
      */
-	
+
     /**
      * {@inheritDoc}
      */
@@ -27,14 +27,22 @@ public class Graph<E> implements GraphADT<E> {
       	{
       		return null;
       	}
-        for(int i=0; i<dictionary.length; i++)
+        int index = getIndex(vertex);
+        if(index < 0)
         {
-        	if(dictionary[i].toString().equals(vertex.toString()))
-        	{
-        		return null;
-        	}
+        	return null;
         }
-        dictionary[items] = vertex;
+				if(items >= dictionary.length())
+        {
+        	E[] temp = new E[dictionary.length*2];
+        	for(int i=0; i<items; i++)
+          {
+          	temp[i] = dictionary[i];
+          }
+          int[][] temp = new int[edges.length()][edges.length()]
+          for(int i=0; i<)
+        }
+				dictionary[items] = vertex;
         items++;
         return vertex;
     }
@@ -44,6 +52,20 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E removeVertex(E vertex) {
+    		if(vertex == null)
+        {
+        return null;
+        }
+        int index = getIndex(vertex);
+        if(index < 0)
+        {
+       	 return null;
+        }
+        else
+        {
+        	dictionary[index] = null;
+        }
+        return vertex;
         
     }
 
@@ -53,14 +75,38 @@ public class Graph<E> implements GraphADT<E> {
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
         
+        
     }    
-
+		private int getIndex(E vertex){
+    		index = 0;	
+    		boolean isFound = false;
+    	  for(int i = 0; i < dictionary.length; i++){
+        		if(dictionary[i].equals()vertex == true){
+            	index = i;
+              isFound = true;
+            }
+        }
+        if(isFound){
+        	return index;
+        }
+        else{
+        	return -1;
+				}
+    }
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
-        
+    		int index1 = getIndex(vertex1);
+        int index2 = getIndex(vertex2);
+        if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2){
+        	return false;
+        }
+        else{
+        	dictionary[i][j] = 0;
+          return true;
+        }
     }
 
     /**
@@ -68,6 +114,14 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean isAdjacent(E vertex1, E vertex2) {
+        int index1 = getIndex(vertex1);
+        int index2 = getIndex(vertex2);
+        if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2){
+        	return false;
+        }
+        else if(dictionary[i][j] == 1){
+        	return true;
+        }
         
     }
 
@@ -77,6 +131,7 @@ public class Graph<E> implements GraphADT<E> {
     @Override
     public Iterable<E> getNeighbors(E vertex) {
         
+        
     }
 
     /**
@@ -84,6 +139,7 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getAllVertices() {
+        return this.dictionary;
         
     }
 
