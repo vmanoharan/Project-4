@@ -9,7 +9,10 @@ import java.util.stream.Stream;
  * @author sapan (sapan@cs.wisc.edu)
  */
 public class WordProcessor {
-	
+//    public static void main(String args[])
+//    {
+//        System.out.println(isAdjacent("Joderasd", "Jodrasd"));
+//    }
 	/**
 	 * Gets a Stream of words from the filepath.
 	 * 
@@ -64,8 +67,12 @@ public class WordProcessor {
 		 * Note: since map and filter return the updated Stream objects, they can chained together as:
 		 * 		streamOfLines.map(...).filter(a -> ...).map(...) and so on
 		 */
-		Stream<String> wordStream = Files.lines(Paths.get(filepath)).map(String::trim).filter(x -> x != null && !x.equals("")).map(String::toUpperCase);
-		return wordStream;
+	    Stream<String> in = Files.lines(Paths.get(filepath))
+	                    .map(String::trim)
+	                    .map(String::toUpperCase)
+	                    .filter(x -> x!=null && !x.equals(""));
+
+				return in;
 	}
 	
 	/**
@@ -86,7 +93,80 @@ public class WordProcessor {
 	 * @return true if word1 and word2 are adjacent else false
 	 */
 	public static boolean isAdjacent(String word1, String word2) {
-		return false;	
+	    int mismatches = 0;
+	    
+	    //replacement
+	    if(word1.length() == word2.length())
+	    {
+	        //if they are equal it's false
+	        if(word1.equals(word2))
+	        {
+	            return false;
+	        }
+	        //loop through each character and check for mismatches, if there is more than one
+	        //they are not adjacent by replacement.
+	        for(int i = 0; i < word1.length(); i++ )
+	        {
+
+	            if(!word1.substring(i, i+1).equals(word2.substring(i, i+1)))
+	            {
+	                mismatches++;
+	                if(mismatches > 1)
+	                {
+	                    return false;
+	                }
+	            }
+	        }
+	        return true;
+	    }
+	    
+	    //addition/deletion (pretty much the same)
+	    else
+	    {
+	        //In addition and deletion one string is longer than the other, it is useful to know
+	        //which string is longer and which one is shorter
+	        String longer;
+	        String shorter;
+	        if(word1.length() > word2.length())
+	        {
+	            longer = word1;
+	            shorter = word2;
+	        }
+	        else
+	        {
+	            longer = word2;
+	            shorter = word1;
+	        }
+	        
+	        for(int i = 0; i < shorter.length(); i++)
+	        {
+	            //Mismatch
+	            if(!longer.substring(i, i+1).equals(shorter.substring(i, i+1)))
+	            {
+                    shorter = shorter.substring(0, i)  //first part of shorter
+                                    + longer.substring(i, i+1) //adding in the missing character
+                                    + shorter.substring(i); //second part of shorter
+                    
+                    //Now that we have added the missing character that appears in longer,
+                    //but not in shorter. If the strings started out adjacent, they should now
+                    //be equal.
+                    //Note: This works for both addition and deletion because addition can be
+                    //viewed as deletion and vice-versa. 
+                    if(shorter.equals(longer))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+	                
+	                                
+	            }
+	        }
+	    }
+		
+		
+		return true;
 	}
-	
 }
