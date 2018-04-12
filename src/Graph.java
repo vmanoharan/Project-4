@@ -84,24 +84,29 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
+		return false;
         
         
     }    
-		private int getIndex(E vertex){
-    		index = 0;	
-    		boolean isFound = false;
-    	  for(int i = 0; i < dictionary.length; i++){
-        		if(dictionary[i].equals()vertex == true){
-            	index = i;
-              isFound = true;
-            }
+    private int getIndex(E vertex){
+    	int index = 0;
+    	boolean isFound = false;
+    	for(int i = 0; i < dictionary.length; i++)
+    	{
+    		if(dictionary[i] != null && ((String)dictionary[i]).equals((String)vertex))
+    		{
+    			index = i;
+    			isFound = true;
+    		}
         }
-        if(isFound){
+        if(isFound)
+        {
         	return index;
         }
-        else{
+        else
+        {
         	return -1;
-				}
+		}
     }
     /**
      * {@inheritDoc}
@@ -129,10 +134,10 @@ public class Graph<E> implements GraphADT<E> {
         if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2){
         	return false;
         }
-        else if(dictionary[i][j] == 1){
+        else if(edges[index1][index2] == 1){
         	return true;
         }
-        
+        return false;
     }
 
     /**

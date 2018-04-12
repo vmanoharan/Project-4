@@ -69,22 +69,22 @@ public class GraphProcessor {
      * @throws IOException 
      */
 	public Integer populateGraph(String filepath) throws IOException {
-		String[] dictionary = (String[]) WordProcessor.getWordStream(filepath).toArray();
-    	for(int i=0; i<dictionary.length; i++)
+		Object[] temp = WordProcessor.getWordStream(filepath).toArray();
+    	for(int i=0; i<temp.length; i++)
     	{
-    		graph.addVertex(dictionary[i]);
+    		graph.addVertex((String) temp[i]);
     	}
-    	for(int i=0; i<dictionary.length; i++)
+    	for(int i=0; i<temp.length; i++)
     	{
-    		for(int j=0; j<dictionary.length; j++)
+    		for(int j=0; j<temp.length; j++)
     		{
-    			if(WordProcessor.isAdjacent(dictionary[i], dictionary[j]))
+    			if(WordProcessor.isAdjacent((String) temp[i], (String) temp[j]))
     			{
-    				graph.addEdge(dictionary[i], dictionary[j]);
+    				graph.addEdge((String) temp[i], (String) temp[j]);
     			}
     		}
     	}
-		return dictionary.length;
+		return temp.length;
     }
 
     
