@@ -41,10 +41,15 @@ import java.util.stream.Stream;
  */
 public class GraphProcessor {
 
+
     /**
      * Graph which stores the dictionary words and their associated connections
      */
     private GraphADT<String> graph;
+    final private int MAX = Integer.MAX_VALUE;
+    private int[][] dist;
+    private int[][] next;
+    private String[] dictionary;
 
     /**
      * Constructor for this class. Initializes instances variables to set the starting state of the object
@@ -69,22 +74,22 @@ public class GraphProcessor {
      * @throws IOException 
      */
 	public Integer populateGraph(String filepath) throws IOException {
-		Object[] temp = WordProcessor.getWordStream(filepath).toArray();
-    	for(int i=0; i<temp.length; i++)
+		dictionary = (String[]) WordProcessor.getWordStream(filepath).toArray();
+    	for(int i=0; i<dictionary.length; i++)
     	{
-    		graph.addVertex((String) temp[i]);
+    		graph.addVertex(dictionary[i]);
     	}
-    	for(int i=0; i<temp.length; i++)
+    	for(int i=0; i<dictionary.length; i++)
     	{
-    		for(int j=0; j<temp.length; j++)
+    		for(int j=0; j<dictionary.length; j++)
     		{
-    			if(WordProcessor.isAdjacent((String) temp[i], (String) temp[j]))
+    			if(WordProcessor.isAdjacent(dictionary[i], dictionary[j]))
     			{
-    				graph.addEdge((String) temp[i], (String) temp[j]);
+    				graph.addEdge(dictionary[i], dictionary[j]);
     			}
     		}
     	}
-		return temp.length;
+		return dictionary.length;
     }
 
     
@@ -109,12 +114,24 @@ public class GraphProcessor {
      * @return List<String> list of the words
      */
     public List<String> getShortestPath(String word1, String word2) {
+        List<String> path = new ArrayList<String>();
         if(word1.equals(word2))
         {
-        	List<String> a = new ArrayList<String>();
-        	return a;
+            return path;
         }
-		return null; // TO BE ADDED
+
+        int index1 = getIndex(word1);
+        int index2 = getIndex(word2);
+
+        if (next[index1][index2] == -1)
+            return path;
+
+        path.add(dictionary[index1]);
+        while (index1 != index2) {
+            index1 = next[index1][index2];
+            path.add(dictionary[index1]);
+        }
+		return path; // TO BE ADDED
     
     }
     
@@ -142,7 +159,15 @@ public class GraphProcessor {
         if (word1.equals(word2)) {
             return -1;
         }
-        return getShortestPath(word1, word2).size() - 1;
+
+        int index1 = getIndex(word1);
+        int index2 = getIndex(word2);
+
+
+        if (dist[index1][index2] == MAX)
+            return -1;
+
+        return dist[index1][index2];
     }
     
     /**
@@ -151,6 +176,51 @@ public class GraphProcessor {
      * Any shortest path algorithm can be used (Djikstra's or Floyd-Warshall recommended).
      */
     public void shortestPathPrecomputation() {
-    
+
+        dist = new int[dictionary.length][dictionary.length];
+        next = new int[dictionary.length][dictionary.length];
+
+        for (int i = 0 ; i < dictionary.length ; i++) {
+            for (int j = 0 ; j < dictionary.length ; j++) {
+                dist[i][j] = MAX;
+                next[i][j] = -1;
+            }
+        }
+
+        for (int i = 0 ; i < dictionary.length ; i++) {
+            for (int j = 0 ; j < dictionary.length ; j++) {
+                if (graph.isAdjacent(dictionary[i], dictionary[j])) {
+                    dist[i][j] = 1;
+                    next[i][j] = j;
+                }
+            }
+        }
+
+        for (int k = 0 ; k < dictionary.length ; k++) {
+            for (int i = 0 ; i < dictionary.length ; i++) {
+                for (int j = 0 ; j < dictionary.length ; j++) {
+                    if (dist[i][k]!=MAX && dist[k][j]!=MAX && dist[i][j]>dist[i][k]+dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        next[i][j] = next[i][k];
+                    }
+
+                }
+            }
+        }
+
+
+    }
+
+    /**
+     * Finds the index of a word in dictionary array. Returns -1 if not found
+     * @param word is the word to find
+     * @return the index of the word
+     */
+    private int getIndex(String word) {
+        for (int i = 0 ; i < dictionary.length ; i++) {
+            if (dictionary[i].equals(word))
+                return i;
+        }
+        return -1;
     }
 }
