@@ -11,8 +11,9 @@ import java.util.Set;
  * 
  */
 public class Graph<E> implements GraphADT<E> {
-    private int[][] edges;
-		private E[] dictionary;
+    private int[][] edges = new int[5][5];
+	@SuppressWarnings("unchecked")
+	private E[] dictionary = (E[]) new Object[5];
     private int items = 0;
     /**
      * Instance variables and constructors
@@ -34,7 +35,8 @@ public class Graph<E> implements GraphADT<E> {
         }
 		if(items >= dictionary.length)
         {
-        	E[] temp = (E[]) new Object[dictionary.length*2];
+        	@SuppressWarnings("unchecked")
+			E[] temp = (E[]) new Object[dictionary.length*2];
         	int[][] temp1 = new int[edges.length*2][edges.length*2];
         	for(int i=0; i<edges.length; i++)
         	{
