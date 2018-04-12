@@ -68,12 +68,8 @@ public class GraphProcessor {
      * @return Integer the number of vertices (words) added
      * @throws IOException 
      */
-	@SuppressWarnings("static-access")
 	public Integer populateGraph(String filepath) throws IOException {
-		String[] dictionary;
-    	WordProcessor wordProcessor = new WordProcessor();
-		Stream<String> inputData = wordProcessor.getWordStream(filepath);
-    	dictionary = (String[]) inputData.toArray();
+		String[] dictionary = (String[]) WordProcessor.getWordStream(filepath).toArray();
     	for(int i=0; i<dictionary.length; i++)
     	{
     		graph.addVertex(dictionary[i]);
@@ -82,7 +78,7 @@ public class GraphProcessor {
     	{
     		for(int j=0; j<dictionary.length; j++)
     		{
-    			if(wordProcessor.isAdjacent(dictionary[i], dictionary[j]))
+    			if(WordProcessor.isAdjacent(dictionary[i], dictionary[j]))
     			{
     				graph.addEdge(dictionary[i], dictionary[j]);
     			}

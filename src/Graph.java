@@ -32,25 +32,25 @@ public class Graph<E> implements GraphADT<E> {
         {
         	return null;
         }
-				if(items >= dictionary.length)
+		if(items >= dictionary.length)
         {
         	E[] temp = (E[]) new Object[dictionary.length*2];
+        	int[][] temp1 = new int[edges.length*2][edges.length*2];
+        	for(int i=0; i<edges.length; i++)
+        	{
+        		for(int j=0; j<edges.length; j++)
+        		{
+        			temp1[i][j] = edges[i][j];
+        		}
+        	}
         	for(int i=0; i<items; i++)
-          {
-          	temp[i] = dictionary[i];
-          }
-          int[][] temp1 = new int[edges.length*2][edges.length*2];
-          for(int i=0; i<edges.length; i++)
-          {
-          	for(int j=0; j<edges.length; j++)
-            {
-            	temp1[i][j] = edges[i][j];
-            }
-          }
-          edges = temp1;
-          dictionary = temp;
+        	{
+        		temp[i] = dictionary[i];
+        	}
+        	edges = temp1;
+        	dictionary = temp;
         }
-				dictionary[items] = vertex;
+		dictionary[items] = vertex;
         items++;
         return vertex;
     }
@@ -60,14 +60,14 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public E removeVertex(E vertex) {
-    		if(vertex == null)
+    	if(vertex == null)
         {
-        return null;
+    			return null;
         }
         int index = getIndex(vertex);
         if(index < 0)
         {
-       	 return null;
+        	return null;
         }
         else
         {
