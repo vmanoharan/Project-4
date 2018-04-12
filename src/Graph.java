@@ -38,16 +38,30 @@ public class Graph<E> implements GraphADT<E> {
         	@SuppressWarnings("unchecked")
 			E[] temp = (E[]) new Object[dictionary.length*2];
         	int[][] temp1 = new int[edges.length*2][edges.length*2];
+        	int k = 0;
+        	int l = 0;
         	for(int i=0; i<edges.length; i++)
         	{
-        		for(int j=0; j<edges.length; j++)
+        		if(dictionary[i - k] != null)
         		{
-        			temp1[i][j] = edges[i][j];
+	        		temp[i - k] = dictionary[i];
+	        		for(int j=0; j<edges.length; j++)
+	        		{
+	        			if(dictionary[j - l] != null)
+	        			{
+	        				temp1[i - k][j - l] = edges[i][j];
+	        			}
+	        			else
+	        			{
+	        				l++;
+	        			}
+	        		}
         		}
-        	}
-        	for(int i=0; i<items; i++)
-        	{
-        		temp[i] = dictionary[i];
+        		else
+        		{
+        			k++;
+        			items--;
+        		}
         	}
         	edges = temp1;
         	dictionary = temp;
@@ -88,6 +102,12 @@ public class Graph<E> implements GraphADT<E> {
         
         
     }    
+    /**
+     * Retrieves the index for the give vertex
+     * If vertex isn't in graph returns -1    
+     * @param vertex
+     * @return index of given vertex
+     */
     private int getIndex(E vertex){
     	int index = 0;
     	boolean isFound = false;
@@ -119,7 +139,8 @@ public class Graph<E> implements GraphADT<E> {
         	return false;
         }
         else{
-        	dictionary[i][j] = 0;
+        	edges[index1][index2] = 0;
+        	edges[index2][index1] = 0;
           return true;
         }
     }
@@ -146,7 +167,10 @@ public class Graph<E> implements GraphADT<E> {
     @Override
     public Iterable<E> getNeighbors(E vertex) {
         int index = getIndex(vertex);
-        for(int i = 0)
+        for(int i = 0; i<items; i++)
+        {
+        	
+        }
         
     }
 
