@@ -29,7 +29,7 @@ public class Graph<E> implements GraphADT<E> {
       		return null;
       	}
         int index = getIndex(vertex);
-        if(index > 0)
+        if(index < 0)
         {
         	return null;
         }
@@ -111,9 +111,9 @@ public class Graph<E> implements GraphADT<E> {
     private int getIndex(E vertex){
     	int index = 0;
     	boolean isFound = false;
-    	for(int i = 0; i < dictionary.length; i++)
+    	for(int i = 0; i < items; i++)
     	{
-    		if(dictionary[i] != null && ((String)dictionary[i]).equals((String)vertex))
+    		if(dictionary[i] != null && ((String)dictionary[i]).equalsIgnoreCase((String)vertex))
     		{
     			index = i;
     			isFound = true;

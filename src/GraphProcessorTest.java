@@ -125,19 +125,23 @@ assertEquals(graphProcessor.getShortestDistance("protest", "airfoil"), new Integ
 assertEquals(graphProcessor.getShortestDistance("tremulous", "airfoil"), new Integer(-1));
 assertEquals(graphProcessor.getShortestDistance("cheap", "peace"), new Integer(-1));
 assertEquals(graphProcessor.getShortestDistance("cheap", "cheap"), new Integer(-1));
-//Give by other team is below
-assertEquals(graphProcessor.getShortestDistance("COMEDO", "CHARGE"), new Integer(49));
-assertEquals(graphProcessor.getShortestDistance("CHARGE", "GIMLETS"), new Integer(78));
-assertEquals(graphProcessor.getShortestDistance("BELLIES", "JOLLIES"), new Integer(2));
-assertEquals(graphProcessor.getShortestDistance("RAPINE", "HOMINY"), new Integer(8));
 }
 
 //this test checks if the getShortestDistance() returns -1 after passing different words, which path exist
 @Test
 public void test06_DiffWord_havepath_getShortestDistance() {
 graphProcessor.shortestPathPrecomputation();
-assertEquals(graphProcessor.getShortestPath("body" , "soy"), new List<String>("body", "boy", "soy");
+assertEquals(graphProcessor.getShortestDistance("COMEDO", "CHARGE"), new Integer(49));
+assertEquals(graphProcessor.getShortestDistance("CHARGE", "GIMLETS"), new Integer(78));
+assertEquals(graphProcessor.getShortestDistance("BELLIES", "JOLLIES"), new Integer(2));
+assertEquals(graphProcessor.getShortestDistance("RAPINE", "HOMINY"), new Integer(8));
+
 // TODO add examples
 }
+//public void test07_shortestPath()
+//{
+//	graphProcessor.shortestPathPrecomputation();
+//	assertEquals(graphProcessor.getShortestPath("body" , "soy"), new List<String>("body", "boy", "soy");
+//}
 
 }
