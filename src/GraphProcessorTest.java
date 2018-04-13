@@ -1,11 +1,12 @@
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 /////////////////////////////////////////////////////////////////////////////
 // Semester: CS400 Spring 2018
@@ -69,7 +70,7 @@ public class GraphProcessorTest {
     }
 
     /**
-     * This test checks whether populateGraph method returns correct number of vertices 
+     * This test checks whether populateGraph method returns correct number of vertices
      * within the graph.
      */
     @Test
@@ -78,7 +79,7 @@ public class GraphProcessorTest {
     }
 
     /**
-     * This test checks whether empty arraylist will be returned after passing two same words into 
+     * This test checks whether empty arraylist will be returned after passing two same words into
      * getShortestPath method.
      */
     @Test
@@ -92,13 +93,17 @@ public class GraphProcessorTest {
     }
 
     /**
-     * This test checks whether getShortestPath() returns correct path after two different 
+     * This test checks whether getShortestPath() returns correct path after two different
      * words are passed into it
      */
     @Test
     public void test04_getShortestPath() {
         graphProcessor.shortestPathPrecomputation();
-        assertEquals(graphProcessor.getShortestPath("body" , "soy"), new List<String>("body", "boy", "soy");
+        List<String> actual = graphProcessor.getShortestPath("body" , "soy");
+        assertEquals(actual.get(0), "body");
+        assertEquals(actual.get(1), "boy");
+        assertEquals(actual.get(2), "soy");
+
     }
 
     /**

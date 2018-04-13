@@ -51,7 +51,7 @@ public class GraphProcessor {
     final private int MAX = Integer.MAX_VALUE;
     private int[][] dist; //Distance between to vertices
     private int[][] next; //Next vertex in a path
-    private String[] dictionary;
+    private Object[] dictionary;
 
     /**
      * Constructor for this class. Initializes instances variables to set the starting state of the object
@@ -76,18 +76,18 @@ public class GraphProcessor {
      * @throws IOException 
      */
 	public Integer populateGraph(String filepath) throws IOException {
-		dictionary = (String[]) WordProcessor.getWordStream(filepath).toArray();
+		dictionary = WordProcessor.getWordStream(filepath).toArray();
     	for(int i=0; i<dictionary.length; i++)
     	{
-    		graph.addVertex(dictionary[i]);
+    		graph.addVertex((String)dictionary[i]);
     	}
     	for(int i=0; i<dictionary.length; i++)
     	{
     		for(int j=0; j<dictionary.length; j++)
     		{
-    			if(WordProcessor.isAdjacent(dictionary[i], dictionary[j]))
+    			if(WordProcessor.isAdjacent((String)dictionary[i], (String)dictionary[j]))
     			{
-    				graph.addEdge(dictionary[i], dictionary[j]);
+    				graph.addEdge((String)dictionary[i], (String)dictionary[j]);
     			}
     		}
     	}
@@ -128,10 +128,10 @@ public class GraphProcessor {
         if (next[index1][index2] == -1)
             return path;
 
-        path.add(dictionary[index1]);
+        path.add((String)dictionary[index1]);
         while (index1 != index2) {
             index1 = next[index1][index2];
-            path.add(dictionary[index1]);
+            path.add((String)dictionary[index1]);
         }
 		return path;
     }
@@ -190,7 +190,7 @@ public class GraphProcessor {
 
         for (int i = 0 ; i < dictionary.length ; i++) {
             for (int j = 0 ; j < dictionary.length ; j++) {
-                if (graph.isAdjacent(dictionary[i], dictionary[j])) {
+                if (graph.isAdjacent((String)dictionary[i], (String)dictionary[j])) {
                     dist[i][j] = 1;
                     next[i][j] = j;
                 }
