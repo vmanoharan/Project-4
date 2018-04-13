@@ -46,9 +46,11 @@ public class GraphProcessor {
      * Graph which stores the dictionary words and their associated connections
      */
     private GraphADT<String> graph;
+
+
     final private int MAX = Integer.MAX_VALUE;
-    private int[][] dist;
-    private int[][] next;
+    private int[][] dist; //Distance between to vertices
+    private int[][] next; //Next vertex in a path
     private String[] dictionary;
 
     /**
@@ -131,8 +133,7 @@ public class GraphProcessor {
             index1 = next[index1][index2];
             path.add(dictionary[index1]);
         }
-		return path; // TO BE ADDED
-    
+		return path;
     }
     
     /**
