@@ -9,10 +9,6 @@ import java.util.stream.Stream;
  * @author sapan (sapan@cs.wisc.edu)
  */
 public class WordProcessor {
-//    public static void main(String args[])
-//    {
-//        System.out.println(isAdjacent("Joderasd", "Jodrasd"));
-//    }
 	/**
 	 * Gets a Stream of words from the filepath.
 	 * 
