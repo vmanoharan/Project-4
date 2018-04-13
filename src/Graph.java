@@ -179,6 +179,7 @@ public class Graph<E> implements GraphADT<E> {
         	    neighbors.add(dictionary[i]);
         	}
         }
+        return neighbors;
         
     }
 
