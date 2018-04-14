@@ -226,11 +226,11 @@ public class GraphProcessor {
      */
     private int getIndex(String word) {
 // DOSN"T WORK BECAUSE dictionary isn't the same here as it is in the graph instance
-//        for (int i = 0 ; i < dictionary.length ; i++) {
-//            if (dictionary[i].equals(word))
-//                return i;
-//        }
-//        return -1;
+        for (int i = 0 ; i < dictionary.length ; i++) {
+            if (dictionary[i].equals(word))
+                return i;
+        }
+        return -1;
     
     }
 }
