@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -124,7 +125,10 @@ public class GraphProcessor {
 
         int index1 = getIndex(word1);
         int index2 = getIndex(word2);
-
+        if(index1 < 0 || index2 < 0)
+        {
+	        	throw new IllegalArgumentException(index1 + "," + index2);
+        }
         if (next[index1][index2] == -1)
             return path;
 
@@ -163,7 +167,10 @@ public class GraphProcessor {
 
         int index1 = getIndex(word1);
         int index2 = getIndex(word2);
-
+        if(index1 < 0 || index2 < 0)
+        {
+        	return -1;
+        }
 
         if (dist[index1][index2] == MAX)
             return -1;
@@ -218,10 +225,12 @@ public class GraphProcessor {
      * @return the index of the word
      */
     private int getIndex(String word) {
-        for (int i = 0 ; i < dictionary.length ; i++) {
-            if (dictionary[i].equals(word))
-                return i;
-        }
-        return -1;
+// DOSN"T WORK BECAUSE dictionary isn't the same here as it is in the graph instance
+//        for (int i = 0 ; i < dictionary.length ; i++) {
+//            if (dictionary[i].equals(word))
+//                return i;
+//        }
+//        return -1;
+    
     }
 }

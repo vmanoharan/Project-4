@@ -39,31 +39,39 @@ public class Graph<E> implements GraphADT<E> {
         	@SuppressWarnings("unchecked")
 			E[] temp = (E[]) new Object[dictionary.length*2];
         	int[][] temp1 = new int[edges.length*2][edges.length*2];
-        	int k = 0;
-        	int l = 0;
-        	for(int i=0; i<edges.length; i++)
+        	for(int i=0; i<dictionary.length; i++)
         	{
-        		if(dictionary[i - k] != null)
+        		temp[i] = dictionary[i];
+        		for(int j=0; j<edges[i].length; j++)
         		{
-	        		temp[i - k] = dictionary[i];
-	        		for(int j=0; j<edges.length; j++)
-	        		{
-	        			if(dictionary[j - l] != null)
-	        			{
-	        				temp1[i - k][j - l] = edges[i][j];
-	        			}
-	        			else
-	        			{
-	        				l++;
-	        			}
-	        		}
-        		}
-        		else
-        		{
-        			k++;
-        			items--;
+        			temp1[i][j] = edges[i][j];
         		}
         	}
+//        	int k = 0;
+//        	int l = 0;
+//        	for(int i=0; i<edges.length; i++)
+//        	{
+//        		if(dictionary[i] != null)
+//        		{
+//	        		temp[i - k] = dictionary[i];
+//	        		for(int j=0; j<edges.length; j++)
+//	        		{
+//	        			if(dictionary[j] != null)
+//	        			{
+//	        				temp1[i - k][j - l] = edges[i][j];
+//	        			}
+//	        			else
+//	        			{
+//	        				l++;
+//	        			}
+//	        		}
+//        		}
+//        		else
+//        		{
+//        			k++;
+//        			items--;
+//        		}
+//        	}
         	edges = temp1;
         	dictionary = temp;
         }
@@ -99,8 +107,15 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
-		return false;
-        
+		int index1 = getIndex(vertex1);
+		int index2 = getIndex(vertex2);
+        if(index1 < 0 || index2 < 0)
+        {
+        	return false;
+        }
+        edges[index1][index2] = 1;
+        edges[index2][index1] = 1;
+        return true;
         
     }    
     /**
@@ -110,24 +125,14 @@ public class Graph<E> implements GraphADT<E> {
      * @return index of given vertex
      */
     private int getIndex(E vertex){
-    	int index = 0;
-    	boolean isFound = false;
     	for(int i = 0; i < items; i++)
     	{
-    		if(dictionary[i] != null && ((String)dictionary[i]).equalsIgnoreCase((String)vertex))
+    		if(dictionary[i] != null && (((String)dictionary[i]).equalsIgnoreCase((String)vertex)))
     		{
-    			index = i;
-    			isFound = true;
+    			return i;
     		}
         }
-        if(isFound)
-        {
-        	return index;
-        }
-        else
-        {
-        	return -1;
-		}
+	    return -1;
     }
     /**
      * {@inheritDoc}
@@ -176,7 +181,10 @@ public class Graph<E> implements GraphADT<E> {
         {
         	if(adjacency_list[i] == 1)
         	{
-        	    neighbors.add(dictionary[i]);
+        		if(dictionary[i] != null)
+        		{
+        			 neighbors.add(dictionary[i]);
+        		}
         	}
         }
         return neighbors;
@@ -192,7 +200,10 @@ public class Graph<E> implements GraphADT<E> {
         
         for(int i = 0; i < items; i++)
         {
-            result.add(dictionary[i]);
+            if(dictionary[i] != null)
+            {
+            	result.add(dictionary[i]);
+            }
         }
         
         return result;

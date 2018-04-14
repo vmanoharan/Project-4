@@ -90,7 +90,11 @@ public class WordProcessor {
 	 */
 	public static boolean isAdjacent(String word1, String word2) {
 	    int mismatches = 0;
-	    
+	    //if a word is 2 characters longer it will never be adjacent
+	    if(Math.abs(word1.length()-word2.length()) > 1)
+	    {
+	    	return false;
+	    }
 	    //replacement
 	    if(word1.length() == word2.length())
 	    {
