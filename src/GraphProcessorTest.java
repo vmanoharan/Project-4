@@ -92,9 +92,9 @@ public class GraphProcessorTest {
     public void test04_getShortestPath() throws IOException {
         graphProcessor.shortestPathPrecomputation();
         List<String> actual = graphProcessor.getShortestPath("comely" , "comedo");
-        assertEquals(actual.get(0), "comely");
-        assertEquals(actual.get(1), "comedy");
-        assertEquals(actual.get(2), "comedo");
+        assertEquals(actual.get(0), "COMELY");
+        assertEquals(actual.get(1), "COMEDY");
+        assertEquals(actual.get(2), "COMEDO");
 
     }
 

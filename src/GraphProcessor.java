@@ -225,9 +225,8 @@ public class GraphProcessor {
      * @return the index of the word
      */
     private int getIndex(String word) {
-// DOSN"T WORK BECAUSE dictionary isn't the same here as it is in the graph instance
         for (int i = 0 ; i < dictionary.length ; i++) {
-            if (dictionary[i].equals(word))
+            if (((String)dictionary[i]).equalsIgnoreCase(word))
                 return i;
         }
         return -1;
