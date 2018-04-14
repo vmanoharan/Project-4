@@ -13,7 +13,7 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 /////////////////////////////////////////////////////////////////////////////
 // Semester: CS400 Spring 2018
 // PROJECT: cs400_XTeam_Project4
-// FILES: Graph.java 
+// FILES: Graph.java
 // GraphADT.java
 // GraphTest.java
 // WordProcessor.java

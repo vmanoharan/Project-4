@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -166,11 +167,19 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getNeighbors(E vertex) {
+        
         int index = getIndex(vertex);
-        for(int i = 0; i<items; i++)
+        int[] adjacency_list = edges[index];
+        ArrayList<E> neighbors = new ArrayList<E>();
+        
+        for(int i = 0; i < adjacency_list.length; i++)
         {
-        	
+        	if(adjacency_list[i] == 1)
+        	{
+        	    neighbors.add(dictionary[i]);
+        	}
         }
+        return neighbors;
         
     }
 
@@ -179,7 +188,14 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getAllVertices() {
-        return this.dictionary;
+        ArrayList<E> result = new ArrayList<E>();
+        
+        for(int i = 0; i < items; i++)
+        {
+            result.add(dictionary[i]);
+        }
+        
+        return result;
         
     }
 
