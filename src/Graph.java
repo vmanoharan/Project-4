@@ -30,7 +30,7 @@ public class Graph<E> implements GraphADT<E> {
       		return null;
       	}
         int index = getIndex(vertex);
-        if(index > 0)
+        if(index >= 0)
         {
         	return null;
         }
@@ -109,7 +109,7 @@ public class Graph<E> implements GraphADT<E> {
     public boolean addEdge(E vertex1, E vertex2) {
 		int index1 = getIndex(vertex1);
 		int index2 = getIndex(vertex2);
-        if(index1 < 0 || index2 < 0)
+        if(index1 < 0 || index2 < 0 || index1 == index2)
         {
         	return false;
         }
