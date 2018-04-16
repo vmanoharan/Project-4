@@ -80,7 +80,7 @@ public class GraphProcessor {
 		dictionary = WordProcessor.getWordStream(filepath).toArray();
     	for(int i=0; i<dictionary.length; i++)
     	{
-    		graph.addVertex((String)dictionary[i]);
+    		graph.addVertex((String)dictionary[i]);// adds the vertices
     	}
     	for(int i=0; i<dictionary.length; i++)
     	{
@@ -88,7 +88,7 @@ public class GraphProcessor {
     		{
     			if(WordProcessor.isAdjacent((String)dictionary[i], (String)dictionary[j]))
     			{
-    				graph.addEdge((String)dictionary[i], (String)dictionary[j]);
+    				graph.addEdge((String)dictionary[i], (String)dictionary[j]); // adds the edges
     			}
     		}
     	}
@@ -127,15 +127,15 @@ public class GraphProcessor {
         int index2 = getIndex(word2);
         if(index1 < 0 || index2 < 0)
         {
-	        	throw new IllegalArgumentException(index1 + "," + index2);
+	        	throw new IllegalArgumentException(index1 + "," + index2);// if the word is not found
         }
         if (next[index1][index2] == -1)
             return path;
-
+	
         path.add((String)dictionary[index1]);
         while (index1 != index2) {
             index1 = next[index1][index2];
-            path.add((String)dictionary[index1]);
+            path.add((String)dictionary[index1]);// adds the path step by step
         }
 		return path;
     }
@@ -170,7 +170,7 @@ public class GraphProcessor {
         if(index1 < 0 || index2 < 0)
         {
         	return -1;
-        }
+        }// if the word is not found
 
         if (dist[index1][index2] == MAX)
             return -1;
@@ -202,7 +202,7 @@ public class GraphProcessor {
                     next[i][j] = j;
                 }
             }
-        }
+        }// initialize the results
 
         for (int k = 0 ; k < dictionary.length ; k++) {
             for (int i = 0 ; i < dictionary.length ; i++) {
@@ -214,7 +214,7 @@ public class GraphProcessor {
 
                 }
             }
-        }
+        }// find the shortest path
 
 
     }
