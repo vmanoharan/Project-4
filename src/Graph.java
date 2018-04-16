@@ -11,8 +11,8 @@ import java.util.Set;
  */
 public class Graph<E> implements GraphADT<E> {
     private int[][] edges = new int[5][5];
-	@SuppressWarnings("unchecked")
-	private E[] dictionary = (E[]) new Object[5];
+    @SuppressWarnings("unchecked")
+    private E[] dictionary = (E[]) new Object[5];
     private int items = 0;
 
     /**
@@ -35,7 +35,7 @@ public class Graph<E> implements GraphADT<E> {
 		if(items >= dictionary.length)
         {
         	@SuppressWarnings("unchecked")// warnings in this case are chekced
-			E[] temp = (E[]) new Object[dictionary.length*2];
+		E[] temp = (E[]) new Object[dictionary.length*2];
         	int[][] temp1 = new int[edges.length*2][edges.length*2];// expansion of matrix and vertex list
         	for(int i=0; i<dictionary.length; i++)
         	{
@@ -92,8 +92,8 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
-		int index1 = getIndex(vertex1);
-		int index2 = getIndex(vertex2);
+	int index1 = getIndex(vertex1);
+	int index2 = getIndex(vertex2);
         if(index1 < 0 || index2 < 0 || index1 == index2)
         {
         	return false;
@@ -127,7 +127,7 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
-    		int index1 = getIndex(vertex1);
+    	int index1 = getIndex(vertex1);
         int index2 = getIndex(vertex2);
         if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2){
         	return false;
@@ -165,8 +165,7 @@ public class Graph<E> implements GraphADT<E> {
      * @return an ArrayList<E> type of neighbours of a given vertex
      */
     @Override
-    public Iterable<E> getNeighbors(E vertex) {
-        
+    public Iterable<E> getNeighbors(E vertex){
         int index = getIndex(vertex);
         int[] adjacency_list = edges[index];
         ArrayList<E> neighbors = new ArrayList<E>();
@@ -191,8 +190,7 @@ public class Graph<E> implements GraphADT<E> {
      */
     @Override
     public Iterable<E> getAllVertices() {
-        ArrayList<E> result = new ArrayList<E>();
-        
+        ArrayList<E> result = new ArrayList<E>();        
         for(int i = 0; i < items; i++)
         {
             if(dictionary[i] != null)
