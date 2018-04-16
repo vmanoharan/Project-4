@@ -25,7 +25,7 @@ public class Graph<E> implements GraphADT<E> {
     public E addVertex(E vertex) {
         if(vertex == null)
       	{
-      		return null;
+      		return null;// The added vertex cannot be null
       	}
         int index = getIndex(vertex);
         if(index >= 0)
@@ -34,42 +34,17 @@ public class Graph<E> implements GraphADT<E> {
         }
 		if(items >= dictionary.length)
         {
-        	@SuppressWarnings("unchecked")
+        	@SuppressWarnings("unchecked")// warnings in this case are chekced
 			E[] temp = (E[]) new Object[dictionary.length*2];
-        	int[][] temp1 = new int[edges.length*2][edges.length*2];
+        	int[][] temp1 = new int[edges.length*2][edges.length*2];// expansion of matrix and vertex list
         	for(int i=0; i<dictionary.length; i++)
         	{
         		temp[i] = dictionary[i];
         		for(int j=0; j<edges[i].length; j++)
         		{
-        			temp1[i][j] = edges[i][j];
-        		}
+        			temp1[i][j] = edges[i][j];//Iterate throught the adjacency matrix to fill
+        		}				// the edges of the new vertex
         	}
-//        	int k = 0;
-//        	int l = 0;
-//        	for(int i=0; i<edges.length; i++)
-//        	{
-//        		if(dictionary[i] != null)
-//        		{
-//	        		temp[i - k] = dictionary[i];
-//	        		for(int j=0; j<edges.length; j++)
-//	        		{
-//	        			if(dictionary[j] != null)
-//	        			{
-//	        				temp1[i - k][j - l] = edges[i][j];
-//	        			}
-//	        			else
-//	        			{
-//	        				l++;
-//	        			}
-//	        		}
-//        		}
-//        		else
-//        		{
-//        			k++;
-//        			items--;
-//        		}
-//        	}
         	edges = temp1;
         	dictionary = temp;
         }
@@ -80,7 +55,6 @@ public class Graph<E> implements GraphADT<E> {
 
     /**
      * Remove a vertex from the graph, remove the
-     * the corresponding edge relationship from the adjacency matrix
      * @param <E> type of a vertex
      * @return E removed vertex
      */
@@ -97,6 +71,13 @@ public class Graph<E> implements GraphADT<E> {
         }
         else
         {
+            for(int i = 0; i < dictionary.length; i ++)
+            {
+                if(isAdjacent(vertex, dictionary[i])) 
+                {
+                    removeEdge(vertex, dictionary[i]);
+                }
+            }
         	dictionary[index] = null;
         }
         return vertex;
