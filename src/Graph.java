@@ -5,10 +5,8 @@ import java.util.Set;
 
 /**
  * Undirected and unweighted graph implementation
- * 
+ * Used adjacency matrix implementation
  * @param <E> type of a vertex
- * 
- * @author sapan (sapan@cs.wisc.edu)
  * 
  */
 public class Graph<E> implements GraphADT<E> {
@@ -16,12 +14,12 @@ public class Graph<E> implements GraphADT<E> {
 	@SuppressWarnings("unchecked")
 	private E[] dictionary = (E[]) new Object[5];
     private int items = 0;
-    /**
-     * Instance variables and constructors
-     */
 
     /**
-     * {@inheritDoc}
+     * Insert a vertex into the graph, fill in
+     * the added edges into the adjacency matrix
+     * @param <E> type of a vertex
+     * @return E added vertex
      */
     @Override
     public E addVertex(E vertex) {
@@ -81,7 +79,10 @@ public class Graph<E> implements GraphADT<E> {
     }
 
     /**
-     * {@inheritDoc}
+     * Remove a vertex from the graph, remove the
+     * the corresponding edge relationship from the adjacency matrix
+     * @param <E> type of a vertex
+     * @return E removed vertex
      */
     @Override
     public E removeVertex(E vertex) {
@@ -103,7 +104,10 @@ public class Graph<E> implements GraphADT<E> {
     }
 
     /**
-     * {@inheritDoc}
+     * Add an edge to between two given vertices
+     * by utilizing the adjacency matrix
+     * @param <E> type of two vertices
+     * @return boolean if the addition of edge is successful
      */
     @Override
     public boolean addEdge(E vertex1, E vertex2) {
@@ -135,7 +139,10 @@ public class Graph<E> implements GraphADT<E> {
 	    return -1;
     }
     /**
-     * {@inheritDoc}
+     * removes an edge to between two given vertices
+     * by utilizing the adjacency matrix
+     * @param <E> type of two vertices
+     * @return boolean if the removal of edge is successful
      */
     @Override
     public boolean removeEdge(E vertex1, E vertex2) {
@@ -152,7 +159,11 @@ public class Graph<E> implements GraphADT<E> {
     }
 
     /**
-     * {@inheritDoc}
+     * Determines if two given vertices are adjacent
+     * by chekcing if they have a edge in the adjacency
+     * matrix
+     * @param <E> type of two vertices
+     * @return boolean if there exits an edge between two given vertices
      */
     @Override
     public boolean isAdjacent(E vertex1, E vertex2) {
@@ -168,7 +179,9 @@ public class Graph<E> implements GraphADT<E> {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns an ArrayList of neighbouring vertices of a given vertex
+     * @param <E> type of vertex
+     * @return an ArrayList<E> type of neighbours of a given vertex
      */
     @Override
     public Iterable<E> getNeighbors(E vertex) {
@@ -192,7 +205,8 @@ public class Graph<E> implements GraphADT<E> {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns an ArrayList of all the vertices in the graph
+     * @return an ArrayList<E> containing all the vertices in the graph
      */
     @Override
     public Iterable<E> getAllVertices() {
