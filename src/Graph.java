@@ -55,6 +55,7 @@ public class Graph<E> implements GraphADT<E> {
 
     /**
      * Remove a vertex from the graph, remove the
+     * edge relationships in the matrix
      * @param <E> type of a vertex
      * @return E removed vertex
      */
@@ -75,7 +76,7 @@ public class Graph<E> implements GraphADT<E> {
             {
                 if(isAdjacent(vertex, dictionary[i])) 
                 {
-                    removeEdge(vertex, dictionary[i]);
+                    removeEdge(vertex, dictionary[i]);// remove the edges
                 }
             }
         	dictionary[index] = null;
@@ -99,7 +100,7 @@ public class Graph<E> implements GraphADT<E> {
         	return false;
         }
         edges[index1][index2] = 1;
-        edges[index2][index1] = 1;
+        edges[index2][index1] = 1;// update the adjacency matrix
         return true;
         
     }    
@@ -129,10 +130,12 @@ public class Graph<E> implements GraphADT<E> {
     public boolean removeEdge(E vertex1, E vertex2) {
     	int index1 = getIndex(vertex1);
         int index2 = getIndex(vertex2);
-        if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2){
+        if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2)
+	{
         	return false;
         }
-        else{
+        else
+	{
         	edges[index1][index2] = 0;
         	edges[index2][index1] = 0;
           return true;
@@ -150,10 +153,12 @@ public class Graph<E> implements GraphADT<E> {
     public boolean isAdjacent(E vertex1, E vertex2) {
         int index1 = getIndex(vertex1);
         int index2 = getIndex(vertex2);
-        if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2){
+        if(index1 == -1 || index2 == -1 || vertex1.equals(vertex2) || index1 == index2)
+	{
         	return false;
         }
-        else if(edges[index1][index2] == 1){
+        else if(edges[index1][index2] == 1)
+	{
         	return true;
         }
         return false;
@@ -176,7 +181,7 @@ public class Graph<E> implements GraphADT<E> {
         	{
         		if(dictionary[i] != null)
         		{
-        			 neighbors.add(dictionary[i]);
+        			 neighbors.add(dictionary[i]);// add the neighbours
         		}
         	}
         }
@@ -195,7 +200,7 @@ public class Graph<E> implements GraphADT<E> {
         {
             if(dictionary[i] != null)
             {
-            	result.add(dictionary[i]);
+            	result.add(dictionary[i]); // add the vertices
             }
         }
         
