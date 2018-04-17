@@ -36,19 +36,19 @@ public class Graph<E> implements GraphADT<E> {
         {
         	@SuppressWarnings("unchecked")// warnings in this case are chekced
 		E[] temp = (E[]) new Object[dictionary.length*2];
-        	int[][] temp1 = new int[edges.length*2][edges.length*2];// expansion of matrix and vertex list
+        	int[][] temp1 = new int[edges.length*2][edges.length*2];// expansion of matrix
         	for(int i=0; i<dictionary.length; i++)
         	{
         		temp[i] = dictionary[i];
-        		for(int j=0; j<edges[i].length; j++)
+        		for(int j=0; j < edges[i].length; j++)
         		{
-        			temp1[i][j] = edges[i][j];//Iterate throught the adjacency matrix to fill
-        		}				// the edges of the new vertex
+        			temp1[i][j] = edges[i][j];//Iterate throught the adjacency matrix to refill the edges
+        		}				
         	}
         	edges = temp1;
         	dictionary = temp;
         }
-		dictionary[items] = vertex;
+        dictionary[items] = vertex;
         items++;
         return vertex;
     }
