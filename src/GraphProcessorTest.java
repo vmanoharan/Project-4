@@ -17,11 +17,11 @@ import org.junit.Test;
 // GraphProcessor.java  
 // GraphProcessor.java
 //
-// USER: 
-// USER:
+// USER: X team 0012
 //
 // Instructor: Deb Deppeler (deppeler@cs.wisc.edu)
-// Bugs: no known bugs, but not complete either
+// Bugs: no known bugs
+/////////////////////////////////////////////////////////////////////////////
 public class GraphProcessorTest {
 	private GraphProcessor graphProcessor;
 	private String fileName;
